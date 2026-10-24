@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="product-list__title">商品一覧画面</h1>
+
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif

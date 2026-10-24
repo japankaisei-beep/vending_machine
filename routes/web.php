@@ -29,14 +29,14 @@ Route::get('/products', [ProductController::class, 'index'])
 Route::get('/products/create', [ProductController::class, 'create'])
     ->name('products.create')
     ->middleware('auth');
-    
+
 Route::post('/products', [ProductController::class, 'store'])
     ->name('products.store')
-    ->middleware('auth');    
+    ->middleware('auth');
 
 Route::get('/products/{id}', [ProductController::class, 'show'])
     ->name('products.show')
-    ->middleware('auth');    
+    ->middleware('auth');
 
 Route::get('/products/{id}/edit', [ProductController::class, 'edit'])
     ->name('products.edit')
@@ -44,8 +44,8 @@ Route::get('/products/{id}/edit', [ProductController::class, 'edit'])
 
 Route::put('/products/{id}', [ProductController::class, 'update'])
     ->name('products.update')
-    ->middleware('auth');    
+    ->middleware('auth');
 
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])
     ->name('products.destroy')
-    ->middleware('auth');    
+    ->middleware('auth');
