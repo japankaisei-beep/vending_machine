@@ -25,7 +25,7 @@
         </div>
     </form>
 
-    <a href="#" class="btn btn-primary mb-3">新規登録</a>
+    <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">新規登録</a>
 
     <table class="table product-list__table">
         <thead>
