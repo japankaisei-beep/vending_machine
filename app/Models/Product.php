@@ -28,8 +28,18 @@ class Product extends Model
         return $this->hasMany(Sale::class);
     }
 
-    public function getProductList()
+    public function getProductList($keyword, $company_id)
     {
-        return $this->with('company')->get();
+        $query = $this->with('company');
+
+        if ($keyword) {
+            $query->where('product_name', 'like', '%' . $keyword . '%');
+        }
+
+        if ($company_id) {
+            $query->where('company_id', $company_id);
+        }
+
+        return $query->get();
     }
 }
