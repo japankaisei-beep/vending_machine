@@ -3,6 +3,13 @@
 @section('content')
 <div class="container">
     <h1 class="product-list__title">商品一覧画面</h1>
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
 
     <form action="{{ route('products.index') }}" method="GET" class="product-search mb-4">
         <div class="row g-2">
@@ -54,11 +61,16 @@
                     <td>{{ $product->company->company_name }}</td>
                     <td>
                         <a href="{{ route('products.show', $product->id) }}" class="btn btn-info btn-sm">詳細</a>
-                        <button type="button" class="btn btn-danger btn-sm">削除</button>
+                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm js-delete-button">削除</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 </div>
+<script src="{{ asset('js/delete_confirm.js') }}"></script>
 @endsection

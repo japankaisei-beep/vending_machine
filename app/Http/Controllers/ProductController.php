@@ -92,4 +92,19 @@ class ProductController extends Controller
 
         return redirect()->route('products.edit', $id)->with('success', '商品を更新しました。');
     }
+
+    public function destroy($id)
+    {
+        DB::beginTransaction();
+        try {
+            $product_model = new Product();
+            $product_model->deleteProduct($id);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('products.index')->with('error', '商品の削除に失敗しました。');
+        }
+
+        return redirect()->route('products.index')->with('success', '商品を削除しました。');
+    }
 }

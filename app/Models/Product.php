@@ -78,4 +78,11 @@ class Product extends Model
 
         return $product->update($update_data);
     }
+
+    public function deleteProduct($id)
+    {
+        $product = $this->findOrFail($id);
+
+        return $product->delete();
+    }
 }

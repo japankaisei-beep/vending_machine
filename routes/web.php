@@ -45,3 +45,7 @@ Route::get('/products/{id}/edit', [ProductController::class, 'edit'])
 Route::put('/products/{id}', [ProductController::class, 'update'])
     ->name('products.update')
     ->middleware('auth');    
+
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])
+    ->name('products.destroy')
+    ->middleware('auth');    
