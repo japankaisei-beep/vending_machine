@@ -42,4 +42,9 @@ class Product extends Model
 
         return $query->get();
     }
+    
+    public function getProductById($id)
+    {
+        return $this->with('company')->findOrFail($id);
+    }
 }

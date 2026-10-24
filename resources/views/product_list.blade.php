@@ -24,7 +24,9 @@
             </div>
         </div>
     </form>
+
     <a href="#" class="btn btn-primary mb-3">新規登録</a>
+
     <table class="table product-list__table">
         <thead>
             <tr>
@@ -51,7 +53,7 @@
                     <td>{{ $product->stock }}</td>
                     <td>{{ $product->company->company_name }}</td>
                     <td>
-                        <a href="#" class="btn btn-info btn-sm">詳細</a>
+                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-info btn-sm">詳細</a>
                         <button type="button" class="btn btn-danger btn-sm">削除</button>
                     </td>
                 </tr>

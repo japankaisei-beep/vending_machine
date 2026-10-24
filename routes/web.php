@@ -25,3 +25,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/products', [ProductController::class, 'index'])
     ->name('products.index')
     ->middleware('auth');
+
+Route::get('/products/{id}', [ProductController::class, 'show'])
+    ->name('products.show')
+    ->middleware('auth');    

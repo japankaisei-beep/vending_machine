@@ -21,4 +21,12 @@ class ProductController extends Controller
 
         return view('product_list', compact('products', 'companies', 'keyword', 'company_id'));
     }
+    
+    public function show($id)
+    {
+        $product_model = new Product();
+        $product = $product_model->getProductById($id);
+
+        return view('product_detail', compact('product'));
+    }
 }
