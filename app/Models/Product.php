@@ -59,4 +59,23 @@ class Product extends Model
             'img_path' => $img_path,
         ]);
     }
+
+    public function updateProduct($id, $data, $img_path)
+    {
+        $product = $this->findOrFail($id);
+
+        $update_data = [
+            'company_id' => $data['company_id'],
+            'product_name' => $data['product_name'],
+            'price' => $data['price'],
+            'stock' => $data['stock'],
+            'comment' => $data['comment'],
+        ];
+
+        if ($img_path) {
+            $update_data['img_path'] = $img_path;
+        }
+
+        return $product->update($update_data);
+    }
 }

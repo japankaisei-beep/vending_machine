@@ -60,4 +60,36 @@ class ProductController extends Controller
 
         return redirect()->route('products.create')->with('success', '商品を登録しました。');
     }
+
+    public function edit($id)
+    {
+        $product_model = new Product();
+        $product = $product_model->getProductById($id);
+
+        $company_model = new Company();
+        $companies = $company_model->getCompanyList();
+
+        return view('product_edit', compact('product', 'companies'));
+    }
+
+    public function update(ProductRequest $request, $id)
+    {
+        $img_path = null;
+        if ($request->hasFile('img_path')) {
+            $file_path = $request->file('img_path')->store('images', 'public');
+            $img_path = 'storage/' . $file_path;
+        }
+
+        DB::beginTransaction();
+        try {
+            $product_model = new Product();
+            $product_model->updateProduct($id, $request->all(), $img_path);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withInput()->with('error', '商品の更新に失敗しました。');
+        }
+
+        return redirect()->route('products.edit', $id)->with('success', '商品を更新しました。');
+    }
 }

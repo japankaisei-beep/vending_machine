@@ -37,3 +37,11 @@ Route::post('/products', [ProductController::class, 'store'])
 Route::get('/products/{id}', [ProductController::class, 'show'])
     ->name('products.show')
     ->middleware('auth');    
+
+Route::get('/products/{id}/edit', [ProductController::class, 'edit'])
+    ->name('products.edit')
+    ->middleware('auth');
+
+Route::put('/products/{id}', [ProductController::class, 'update'])
+    ->name('products.update')
+    ->middleware('auth');    

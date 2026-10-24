@@ -39,7 +39,7 @@
         </tr>
     </table>
 
-    <a href="#" class="btn btn-warning">編集</a>
+    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">編集</a>
     <a href="{{ route('products.index') }}" class="btn btn-secondary">戻る</a>
 </div>
 @endsection
