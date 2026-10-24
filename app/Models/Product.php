@@ -42,9 +42,21 @@ class Product extends Model
 
         return $query->get();
     }
-    
+
     public function getProductById($id)
     {
         return $this->with('company')->findOrFail($id);
+    }
+
+    public function registerProduct($data, $img_path)
+    {
+        return $this->create([
+            'company_id' => $data['company_id'],
+            'product_name' => $data['product_name'],
+            'price' => $data['price'],
+            'stock' => $data['stock'],
+            'comment' => $data['comment'],
+            'img_path' => $img_path,
+        ]);
     }
 }
