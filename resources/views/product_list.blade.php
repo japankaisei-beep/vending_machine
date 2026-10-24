@@ -24,7 +24,7 @@
             </div>
         </div>
     </form>
-
+    <a href="#" class="btn btn-primary mb-3">新規登録</a>
     <table class="table product-list__table">
         <thead>
             <tr>
@@ -34,6 +34,7 @@
                 <th>価格</th>
                 <th>在庫数</th>
                 <th>メーカー名</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
@@ -49,6 +50,10 @@
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->stock }}</td>
                     <td>{{ $product->company->company_name }}</td>
+                    <td>
+                        <a href="#" class="btn btn-info btn-sm">詳細</a>
+                        <button type="button" class="btn btn-danger btn-sm">削除</button>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
