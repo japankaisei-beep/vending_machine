@@ -12,12 +12,14 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
-    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data" class="product-create__form">
+    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data"
+        class="product-create__form">
         @csrf
 
         <div class="mb-3">
             <label for="product_name" class="form-label">商品名<span class="text-danger">*</span></label>
-            <input type="text" name="product_name" id="product_name" class="form-control" value="{{ old('product_name') }}">
+            <input type="text" name="product_name" id="product_name" class="form-control"
+                value="{{ old('product_name') }}">
             @error('product_name')
                 <div class="text-danger">{{ $message }}</div>
             @enderror

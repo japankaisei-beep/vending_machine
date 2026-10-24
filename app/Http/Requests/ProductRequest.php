@@ -6,13 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ProductRequest extends FormRequest
 {
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
-    public function rules()
-    {
+    public function rules() {
         return [
             'product_name' => 'required|max:255',
             'company_id' => 'required|integer|exists:companies,id',
@@ -23,8 +21,7 @@ class ProductRequest extends FormRequest
         ];
     }
 
-    public function attributes()
-    {
+    public function attributes() {
         return [
             'product_name' => '商品名',
             'company_id' => 'メーカー名',
@@ -35,8 +32,7 @@ class ProductRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
+    public function messages() {
         return [
             'required' => ':attributeは必須項目です。',
             'max' => ':attributeは:max文字以内で入力してください。',

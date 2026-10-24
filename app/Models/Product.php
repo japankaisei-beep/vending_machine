@@ -18,18 +18,15 @@ class Product extends Model
         'img_path',
     ];
 
-    public function company()
-    {
+    public function company() {
         return $this->belongsTo(Company::class);
     }
 
-    public function sales()
-    {
+    public function sales() {
         return $this->hasMany(Sale::class);
     }
 
-    public function getProductList($keyword, $company_id)
-    {
+    public function getProductList($keyword, $company_id) {
         $query = $this->with('company');
 
         if ($keyword) {
@@ -43,13 +40,11 @@ class Product extends Model
         return $query->get();
     }
 
-    public function getProductById($id)
-    {
+    public function getProductById($id) {
         return $this->with('company')->findOrFail($id);
     }
 
-    public function registerProduct($data, $img_path)
-    {
+    public function registerProduct($data, $img_path) {
         return $this->create([
             'company_id' => $data['company_id'],
             'product_name' => $data['product_name'],
@@ -60,8 +55,7 @@ class Product extends Model
         ]);
     }
 
-    public function updateProduct($id, $data, $img_path)
-    {
+    public function updateProduct($id, $data, $img_path) {
         $product = $this->findOrFail($id);
 
         $update_data = [
@@ -79,8 +73,7 @@ class Product extends Model
         return $product->update($update_data);
     }
 
-    public function deleteProduct($id)
-    {
+    public function deleteProduct($id) {
         $product = $this->findOrFail($id);
 
         return $product->delete();

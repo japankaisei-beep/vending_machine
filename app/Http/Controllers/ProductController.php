@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $keyword = $request->input('keyword');
         $company_id = $request->input('company_id');
 
@@ -24,24 +23,21 @@ class ProductController extends Controller
         return view('product_list', compact('products', 'companies', 'keyword', 'company_id'));
     }
 
-    public function show($id)
-    {
+    public function show($id) {
         $product_model = new Product();
         $product = $product_model->getProductById($id);
 
         return view('product_detail', compact('product'));
     }
 
-    public function create()
-    {
+    public function create() {
         $company_model = new Company();
         $companies = $company_model->getCompanyList();
 
         return view('product_create', compact('companies'));
     }
 
-    public function store(ProductRequest $request)
-    {
+    public function store(ProductRequest $request) {
         $img_path = null;
         if ($request->hasFile('img_path')) {
             $file_path = $request->file('img_path')->store('images', 'public');
@@ -61,8 +57,7 @@ class ProductController extends Controller
         return redirect()->route('products.create')->with('success', '商品を登録しました。');
     }
 
-    public function edit($id)
-    {
+    public function edit($id) {
         $product_model = new Product();
         $product = $product_model->getProductById($id);
 
@@ -72,8 +67,7 @@ class ProductController extends Controller
         return view('product_edit', compact('product', 'companies'));
     }
 
-    public function update(ProductRequest $request, $id)
-    {
+    public function update(ProductRequest $request, $id) {
         $img_path = null;
         if ($request->hasFile('img_path')) {
             $file_path = $request->file('img_path')->store('images', 'public');
@@ -93,8 +87,7 @@ class ProductController extends Controller
         return redirect()->route('products.edit', $id)->with('success', '商品を更新しました。');
     }
 
-    public function destroy($id)
-    {
+    public function destroy($id) {
         DB::beginTransaction();
         try {
             $product_model = new Product();
