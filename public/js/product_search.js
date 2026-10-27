@@ -10,6 +10,7 @@ $(function () {
         })
             .done(function (html) {
                 $('.js-product-list-body').html(html);
+                $('.product-list__table').trigger('update');
             })
             .fail(function () {
                 alert('検索に失敗しました。');

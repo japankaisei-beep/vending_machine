@@ -75,5 +75,6 @@
     </table>
 </div>
 <script src="{{ asset('js/delete_confirm.js') }}"></script>
+<script src="{{ asset('js/product_sort.js') }}"></script>
 <script src="{{ asset('js/product_search.js') }}"></script>
 @endsection
