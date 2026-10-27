@@ -26,6 +26,10 @@ class ProductController extends Controller
         $company_model = new Company();
         $companies = $company_model->getCompanyList();
 
+        if ($request->ajax()) {
+            return view('product_list_rows', compact('products'));
+        }
+
         return view('product_list', compact('products', 'companies', 'search'));
     }
 
