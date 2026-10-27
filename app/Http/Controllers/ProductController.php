@@ -11,16 +11,22 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     public function index(Request $request) {
-        $keyword = $request->input('keyword');
-        $company_id = $request->input('company_id');
+        $search = $request->only([
+            'keyword',
+            'company_id',
+            'min_price',
+            'max_price',
+            'min_stock',
+            'max_stock',
+        ]);
 
         $product_model = new Product();
-        $products = $product_model->getProductList($keyword, $company_id);
+        $products = $product_model->getProductList($search);
 
         $company_model = new Company();
         $companies = $company_model->getCompanyList();
 
-        return view('product_list', compact('products', 'companies', 'keyword', 'company_id'));
+        return view('product_list', compact('products', 'companies', 'search'));
     }
 
     public function show($id) {

@@ -26,18 +26,34 @@ class Product extends Model
         return $this->hasMany(Sale::class);
     }
 
-    public function getProductList($keyword, $company_id) {
+    public function getProductList($search) {
         $query = $this->with('company');
 
-        if ($keyword) {
-            $query->where('product_name', 'like', '%' . $keyword . '%');
+        if (!empty($search['keyword'])) {
+            $query->where('product_name', 'like', '%' . $search['keyword'] . '%');
         }
 
-        if ($company_id) {
-            $query->where('company_id', $company_id);
+        if (!empty($search['company_id'])) {
+            $query->where('company_id', $search['company_id']);
         }
 
-        return $query->get();
+        if (!is_null($search['min_price'] ?? null)) {
+            $query->where('price', '>=', $search['min_price']);
+        }
+
+        if (!is_null($search['max_price'] ?? null)) {
+            $query->where('price', '<=', $search['max_price']);
+        }
+
+        if (!is_null($search['min_stock'] ?? null)) {
+            $query->where('stock', '>=', $search['min_stock']);
+        }
+
+        if (!is_null($search['max_stock'] ?? null)) {
+            $query->where('stock', '<=', $search['max_stock']);
+        }
+
+        return $query->orderBy('id', 'desc')->get();
     }
 
     public function getProductById($id) {

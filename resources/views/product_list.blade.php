@@ -13,21 +13,43 @@
     @endif
 
     <form action="{{ route('products.index') }}" method="GET" class="product-search mb-4">
-        <div class="row g-2">
-            <div class="col-md-5">
-                <input type="text" name="keyword" class="form-control" placeholder="検索キーワード" value="{{ $keyword }}">
+        <div class="row g-2 mb-2">
+            <div class="col-md-6">
+                <input type="text" name="keyword" class="form-control" placeholder="検索キーワード"
+                    value="{{ $search['keyword'] ?? '' }}">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <select name="company_id" class="form-select">
                     <option value="">メーカー名</option>
                     @foreach ($companies as $company)
-                        <option value="{{ $company->id }}" @selected($company_id == $company->id)>
+                        <option value="{{ $company->id }}"
+                            @selected(($search['company_id'] ?? '') == $company->id)>
                             {{ $company->company_name }}
                         </option>
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-3">
+        </div>
+        <div class="row g-2 align-items-center">
+            <div class="col-md-2">
+                <input type="number" name="min_price" class="form-control" placeholder="価格(下限)" min="0"
+                    value="{{ $search['min_price'] ?? '' }}">
+            </div>
+            <div class="col-auto">〜</div>
+            <div class="col-md-2">
+                <input type="number" name="max_price" class="form-control" placeholder="価格(上限)" min="0"
+                    value="{{ $search['max_price'] ?? '' }}">
+            </div>
+            <div class="col-md-2">
+                <input type="number" name="min_stock" class="form-control" placeholder="在庫数(下限)" min="0"
+                    value="{{ $search['min_stock'] ?? '' }}">
+            </div>
+            <div class="col-auto">〜</div>
+            <div class="col-md-2">
+                <input type="number" name="max_stock" class="form-control" placeholder="在庫数(上限)" min="0"
+                    value="{{ $search['max_stock'] ?? '' }}">
+            </div>
+            <div class="col-auto">
                 <button type="submit" class="btn btn-secondary">検索</button>
             </div>
         </div>
