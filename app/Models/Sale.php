@@ -16,4 +16,10 @@ class Sale extends Model
     public function product() {
         return $this->belongsTo(Product::class);
     }
+
+    public function registerSale($product_id) {
+        return $this->create([
+            'product_id' => $product_id,
+        ]);
+    }
 }

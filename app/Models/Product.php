@@ -94,4 +94,12 @@ class Product extends Model
 
         return $product->delete();
     }
+
+    public function getProductForPurchase($id) {
+        return $this->lockForUpdate()->findOrFail($id);
+    }
+
+    public function decreaseStock($product) {
+        return $product->decrement('stock');
+    }
 }
