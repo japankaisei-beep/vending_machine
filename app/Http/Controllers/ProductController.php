@@ -97,7 +97,7 @@ class ProductController extends Controller
         return redirect()->route('products.edit', $id)->with('success', '商品を更新しました。');
     }
 
-    public function destroy($id) {
+    public function destroy(Request $request, $id) {
         DB::beginTransaction();
         try {
             $product_model = new Product();
@@ -105,7 +105,16 @@ class ProductController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
+
+            if ($request->ajax()) {
+                return response()->json(['message' => '商品の削除に失敗しました。'], 500);
+            }
+
             return redirect()->route('products.index')->with('error', '商品の削除に失敗しました。');
+        }
+
+        if ($request->ajax()) {
+            return response()->json(['message' => '商品を削除しました。']);
         }
 
         return redirect()->route('products.index')->with('success', '商品を削除しました。');
