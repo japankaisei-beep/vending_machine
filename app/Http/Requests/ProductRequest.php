@@ -14,8 +14,8 @@ class ProductRequest extends FormRequest
         return [
             'product_name' => 'required|max:255',
             'company_id' => 'required|integer|exists:companies,id',
-            'price' => 'required|integer|min:0',
-            'stock' => 'required|integer|min:0',
+            'price' => 'required|integer|min:0|max:2147483647',
+            'stock' => 'required|integer|min:0|max:2147483647',
             'comment' => 'nullable|max:10000',
             'img_path' => 'nullable|image|max:2048',
         ];
@@ -41,6 +41,8 @@ class ProductRequest extends FormRequest
             'exists' => ':attributeを正しく選択してください。',
             'image' => ':attributeには画像ファイルを選択してください。',
             'img_path.max' => ':attributeは2MB以下のファイルを選択してください。',
+            'price.max' => ':attributeは2147483647以下で入力してください。',
+            'stock.max' => ':attributeは2147483647以下で入力してください。',
         ];
     }
 }
